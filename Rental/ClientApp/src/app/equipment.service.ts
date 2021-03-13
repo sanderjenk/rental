@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,9 @@ import { Injectable } from '@angular/core';
 })
 export class EquipmentService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  public getEquipments() {
+    return this.http.get("https://localhost:44373/api/equipments");
+  }
 }
