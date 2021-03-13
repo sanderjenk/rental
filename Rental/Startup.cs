@@ -28,6 +28,18 @@ namespace Rental
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "AllowAll",
+                    builder =>
+                    {
+                        builder
+                        .AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                    });
+            });
+
             services.AddDbContext<RentingContext>(opt => opt.UseInMemoryDatabase("Renting"));
 
             services.AddScoped<RentingContext>();
@@ -51,7 +63,7 @@ namespace Rental
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseCors("AllowAll");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
