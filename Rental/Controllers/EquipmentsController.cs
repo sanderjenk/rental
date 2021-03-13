@@ -8,8 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Rental.Controllers
 {
     [Route("api/equipments")]
@@ -23,7 +21,7 @@ namespace Rental.Controllers
             _rentingRepository = rentingRepository;
             _mapper = mapper;
         }
-        // GET: api/<EquipmentsController>
+        
         [HttpGet]
         public IActionResult GetEquipments()
         {
