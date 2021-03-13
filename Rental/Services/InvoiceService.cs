@@ -54,7 +54,7 @@ namespace Rental.Services
 
             return new CalculatedInvoice
             {
-                CartItems = items,
+                InvoiceLines = items,
                 TotalPrice = totalPrice,
                 TotalBonusPoints = totalbonusPoints
             };

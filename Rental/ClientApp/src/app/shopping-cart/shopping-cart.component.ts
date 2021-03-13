@@ -23,8 +23,6 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   generateInvoice() {
-    this.shoppingCartService.getInvoiceData().subscribe(data => {
-      console.log(data);
-    })
+    this.shoppingCartService.generatePdf();
   }
 }

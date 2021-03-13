@@ -7,7 +7,7 @@ namespace Rental.Models
 {
     public class CalculatedInvoice
     {
-        public IEnumerable<InvoiceLine> CartItems { get; set; }
+        public IEnumerable<InvoiceLine> InvoiceLines { get; set; }
         public decimal TotalPrice { get; set; }
         public int TotalBonusPoints { get; set; }
     }
