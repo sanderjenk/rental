@@ -20,7 +20,7 @@ namespace Rental.Controllers
             _shoppingCartService = shoppingCartService;
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult GetShoppingCart(List<ShoppingCartItem> shoppingCartItems)
         {
             var shoppingCart = _shoppingCartService.GetCalculatedShoppingCart(shoppingCartItems);
