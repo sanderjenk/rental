@@ -23,3 +23,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
       width: 1170px;
     }
   }
+
+  h1.page-header {
+    text-align: center;
+    margin-top: 3em;
+}
