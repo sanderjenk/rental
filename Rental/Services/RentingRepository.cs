@@ -18,5 +18,10 @@ namespace Rental.Services
         {
             return _context.Equipments;
         }
+
+        public Equipment GetEquipment(int id)
+        {
+            return _context.Equipments.Find(id);
+        }
     }
 }
