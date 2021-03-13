@@ -33,6 +33,7 @@ namespace Rental
             services.AddScoped<RentingContext>();
 
             services.AddScoped<IRentingRepository, RentingRepository>();
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddControllers();
         }
