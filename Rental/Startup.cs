@@ -45,7 +45,7 @@ namespace Rental
             services.AddScoped<RentingContext>();
 
             services.AddScoped<IRentingRepository, RentingRepository>();
-            services.AddScoped<IShoppingCartService, ShoppingCartService>();
+            services.AddScoped<IInvoiceService, InvoiceService>();
 
             services.AddAutoMapper(typeof(Startup));
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Rental.Services
 {
-    public class ShoppingCartService : IShoppingCartService
+    public class InvoiceService : IInvoiceService
     {
         const decimal ONE_TIME = 100;
         const decimal PREMIUM = 60;
@@ -17,13 +17,13 @@ namespace Rental.Services
 
         IRentingRepository _rentingRepository;
         IMapper _mapper;
-        public ShoppingCartService(IRentingRepository rentingRepository, IMapper mapper)
+        public InvoiceService(IRentingRepository rentingRepository, IMapper mapper)
         {
             _rentingRepository = rentingRepository;
             _mapper = mapper;
         }
 
-        public CalculatedShoppingCart GetCalculatedShoppingCart(List<ShoppingCartItem> shoppingCartItems)
+        public CalculatedInvoice GetCalculatedShoppingCart(List<ShoppingCartItem> shoppingCartItems)
         {
             var items = shoppingCartItems.Select(x =>
             {
@@ -37,7 +37,7 @@ namespace Rental.Services
 
                 var equipmentDto = _mapper.Map<EquipmentDto>(equipment);
 
-                return new CalculatedShoppingCartItem
+                return new InvoiceLine
                 {
                     Days = x.Days,
                     Equipment = equipmentDto,
@@ -47,7 +47,7 @@ namespace Rental.Services
 
             var totalPrice = items.Sum(x => x.Price);
 
-            return new CalculatedShoppingCart { CartItems = items, TotalPrice = totalPrice };
+            return new CalculatedInvoice { CartItems = items, TotalPrice = totalPrice };
         }
 
         class StrategyContext

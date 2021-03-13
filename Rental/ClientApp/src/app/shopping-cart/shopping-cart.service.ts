@@ -17,7 +17,7 @@ export class ShoppingCartService {
 
   public addItemToCart(item: CartItem) {
     let currentCart = this.cartSubject.value;
-    let existingItem = currentCart.find(x => x.equipmentId == item.equipmentId);
+    let existingItem = currentCart.find(x => x.equipment.id == item.equipment.id);
     if (existingItem) {
       existingItem.days += item.days; 
     } else {
@@ -26,7 +26,10 @@ export class ShoppingCartService {
     this.updateCart(currentCart);
   }
 
-  public getCalculatedShoppingCart() {
-    return this.http.post("https://localhost:44373/api/shoppingCart", this.cartSubject.value);
+  public getInvoiceData() {
+    const test = this.cartSubject.value.map(x => {
+      return {equipmentId: x.equipment.id, days: x.days}
+    })
+    return this.http.post("https://localhost:44373/api/invoices", test);
   }
 }

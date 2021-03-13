@@ -1,4 +1,6 @@
+import { Equipment } from "../equipment-list/equipment";
+
 export class CartItem {
-    equipmentId: number;
+    equipment: Equipment;
     days: number;
 }

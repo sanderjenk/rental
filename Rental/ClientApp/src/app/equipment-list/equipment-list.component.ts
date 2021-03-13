@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EquipmentService } from '../equipment.service';
 import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
+import { Equipment } from './equipment';
 
 @Component({
   selector: 'app-equipment-list',
@@ -26,7 +27,7 @@ export class EquipmentListComponent implements OnInit {
     .subscribe(items => this.equipments = items, error => console.log(error));
   }
 
-  addToCart(id: number, days: string) {
+  addToCart(equipment: Equipment, days: string) {
     const parsedDays = parseInt(days);
     if (!days || days == "") {
       this.openSnackBar("\"Days\" is required", "Dismiss");
@@ -40,7 +41,7 @@ export class EquipmentListComponent implements OnInit {
       this.openSnackBar("\"Days\" can't be negative", "Dismiss");
     }
     else {
-      this.shoppingCartService.addItemToCart({equipmentId: id, days: parsedDays})
+      this.shoppingCartService.addItemToCart({equipment: equipment, days: parsedDays})
       this.openSnackBar("Equipment added to cart", "Dismiss");
     }
   }

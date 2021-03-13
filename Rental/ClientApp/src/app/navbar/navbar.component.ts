@@ -13,8 +13,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.shoppingCartService.cartItemsObs.subscribe(items => {
-      this.cartCount = items.reduce((total, x) => total + x.days, 0)
-      console.log(this.cartCount)
+      this.cartCount = items.length;
     });
   }
 

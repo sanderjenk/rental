@@ -8,7 +8,7 @@ import { ShoppingCartService } from './shopping-cart.service';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'type', 'days', 'price'];
+  displayedColumns: string[] = ['name', 'type', 'days'];
 
   dataSource = new CartDataSource(this.shoppingCartService);
 
@@ -20,5 +20,11 @@ export class ShoppingCartComponent implements OnInit {
   discardShoppingCart() {
     this.shoppingCartService.updateCart([]);
     this.dataSource = null;
+  }
+
+  generateInvoice() {
+    this.shoppingCartService.getInvoiceData().subscribe(data => {
+      console.log(data);
+    })
   }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rental.Models
 {
-    public class CalculatedShoppingCartItem
+    public class InvoiceLine
     {
         public EquipmentDto Equipment { get; set; }
         public int Days { get; set; }

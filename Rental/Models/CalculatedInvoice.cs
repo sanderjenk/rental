@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Rental.Models
 {
-    public class CalculatedShoppingCart
+    public class CalculatedInvoice
     {
-        public IEnumerable<CalculatedShoppingCartItem> CartItems { get; set; }
+        public IEnumerable<InvoiceLine> CartItems { get; set; }
         public decimal TotalPrice { get; set; }
     }
 }

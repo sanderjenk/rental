@@ -11,7 +11,7 @@ export class CartDataSource extends DataSource<any> {
     super();
   }
   connect(): Observable<any> {
-    return this.shoppingCartService.getCalculatedShoppingCart().pipe(map((x: any) => x.cartItems));
+    return this.shoppingCartService.cartItemsObs;
   }
 
   disconnect() { }
