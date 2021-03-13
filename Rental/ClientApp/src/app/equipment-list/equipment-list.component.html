@@ -9,12 +9,12 @@
             <img mat-card-image [src]="x.imageUrl">
             <mat-card-content>
                 <mat-form-field appearance="legacy">
-                    <mat-label>Quantity</mat-label>
-                    <input matInput type="number" placeholder="Placeholder" required>
+                    <mat-label>Days</mat-label>
+                    <input matInput #days type="number" placeholder="Placeholder" required>
                 </mat-form-field>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-raised-button color="accent">ADD TO CART</button>
+                <button mat-raised-button color="accent" (click)="addToCart(x.id, days.value)">ADD TO CART</button>
             </mat-card-actions>
         </mat-card>
     </mat-grid-tile>
