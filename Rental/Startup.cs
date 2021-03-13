@@ -45,6 +45,8 @@ namespace Rental
             services.AddScoped<RentingContext>();
 
             services.AddScoped<IRentingRepository, RentingRepository>();
+            services.AddScoped<IShoppingCartService, ShoppingCartService>();
+
             services.AddAutoMapper(typeof(Startup));
 
             services.AddControllers();
@@ -63,7 +65,9 @@ namespace Rental
             app.UseRouting();
 
             app.UseAuthorization();
+
             app.UseCors("AllowAll");
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
