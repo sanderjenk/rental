@@ -45,8 +45,11 @@ export class ShoppingCartService {
 
   public getDocDefinition(data) {
     let equipmentsTable: any[] = data.invoiceLines.map(x => [x.equipment.name, x.equipment.type, x.days, x.bonusPoints, x.price])
+    
     equipmentsTable.unshift(["Name", "Type", "Days", "BonusPoints", "Price"])
+    
     equipmentsTable.push(["", "", "", `Total: ${data.totalBonusPoints}`, `Total: ${data.totalPrice}`])
+    
     const docDefinition = {
       content: [
         { text: 'Invoice', fontSize: 16, bold: true, style: 'header', margin: [0,0, 20, 20]},
@@ -62,7 +65,7 @@ export class ShoppingCartService {
         { text: 'If you have any questions, then please contact renting.company@gmail.com ', fontSize: 12, margin: [0,0, 20, 20]},
       ]
     }
-
+    
     return docDefinition;
   }
 
