@@ -11,5 +11,6 @@ namespace Rental.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public EquipmentType Type { get; set; }
+        public string ImageUrl { get; set; }
     }
 }
