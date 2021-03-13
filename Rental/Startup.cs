@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Rental.Services;
 
 namespace Rental
 {
@@ -28,7 +29,10 @@ namespace Rental
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<RentingContext>(opt => opt.UseInMemoryDatabase("Renting"));
+
             services.AddScoped<RentingContext>();
+
+            services.AddScoped<IRentingRepository, RentingRepository>();
 
             services.AddControllers();
         }

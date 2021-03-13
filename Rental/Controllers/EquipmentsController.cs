@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Rental.Entities;
+using Rental.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,11 @@ namespace Rental.Controllers
     [ApiController]
     public class EquipmentsController : ControllerBase
     {
+        private readonly IRentingRepository _rentingRepository;
+        public EquipmentsController(IRentingRepository rentingRepository)
+        {
+            _rentingRepository = rentingRepository;
+        }
         // GET: api/<EquipmentsController>
         [HttpGet]
         public IEnumerable<Equipment> GetEquipments()
