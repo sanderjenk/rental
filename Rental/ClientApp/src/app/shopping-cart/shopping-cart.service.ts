@@ -53,6 +53,7 @@ export class ShoppingCartService {
     const docDefinition = {
       content: [
         { text: 'Invoice', fontSize: 16, bold: true, style: 'header', margin: [0,0, 20, 20]},
+        { text: "Date: " + new Date().toDateString(), alignment: "right"},
         { text: 'Renting Company - Your favourite company for renting stuff', fontSize: 12, style: 'subheader', margin: [0,0, 20, 20]},
         {
           style: 'tableExample',
@@ -65,7 +66,6 @@ export class ShoppingCartService {
         { text: 'If you have any questions, then please contact renting.company@gmail.com ', fontSize: 12, margin: [0,0, 20, 20]},
       ]
     }
-    
     return docDefinition;
   }
 
