@@ -106,7 +106,21 @@ namespace Rental.Services
 
             public decimal CalculatePrice(Equipment equipment, int days)
             {
-                return 10;
+                var price = ONE_TIME;
+                var counter = 1;
+                for (int i = 0; i < days; i++)
+                {
+                    if (counter <= 2)
+                    {
+                        price += PREMIUM;
+                    }
+                    else
+                    {
+                        price += REGULAR;
+                    }
+                    counter++;
+                }
+                return price;
             }
         }
 
@@ -115,7 +129,21 @@ namespace Rental.Services
 
             public decimal CalculatePrice(Equipment equipment, int days)
             {
-                return 1;
+                decimal price = 0;
+                var counter = 1;
+                for (int i = 0; i < days; i++)
+                {
+                    if (counter <= 3)
+                    {
+                        price += PREMIUM;
+                    }
+                    else
+                    {
+                        price += REGULAR;
+                    }
+                    counter++;
+                }
+                return price;
             }
         }
     }
