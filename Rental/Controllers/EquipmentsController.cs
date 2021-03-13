@@ -21,11 +21,10 @@ namespace Rental.Controllers
         }
         // GET: api/<EquipmentsController>
         [HttpGet]
-        public IEnumerable<Equipment> GetEquipments()
+        public IActionResult GetEquipments()
         {
-            return new List<Equipment> {
-               new Equipment { Name = "Caterpillar bulldozer", Type = Enums.EquipmentType.Heavy} 
-            };
+            var equipments = _rentingRepository.GetEquipments();
+            return Ok(equipments);
         }
     }
 }
