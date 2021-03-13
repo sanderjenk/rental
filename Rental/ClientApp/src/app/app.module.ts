@@ -10,6 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { EquipmentCardComponent } from './equipment-card/equipment-card.component';
 import { MatCardModule } from '@angular/material/card';
 import { EquipmentListComponent } from './equipment-list/equipment-list.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -21,10 +23,12 @@ import { EquipmentListComponent } from './equipment-list/equipment-list.componen
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
