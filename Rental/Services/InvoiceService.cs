@@ -33,7 +33,9 @@ namespace Rental.Services
 
                 var strategy = strategyContext.GetStrategy(equipment.Type);
 
-                var price = strategyContext.ApplyStrategy(strategy);
+                var price = strategyContext.ApplyPriceStrategy(strategy);
+
+                var bonusPoints = strategyContext.ApplyBonusPointsStrategy(strategy);
 
                 var equipmentDto = _mapper.Map<EquipmentDto>(equipment);
 
@@ -41,13 +43,21 @@ namespace Rental.Services
                 {
                     Days = x.Days,
                     Equipment = equipmentDto,
-                    Price = price
+                    Price = price,
+                    BonusPoints = bonusPoints,
                 };
             });
 
+            var totalbonusPoints = items.Sum(x => x.BonusPoints);
+
             var totalPrice = items.Sum(x => x.Price);
 
-            return new CalculatedInvoice { CartItems = items, TotalPrice = totalPrice };
+            return new CalculatedInvoice
+            {
+                CartItems = items,
+                TotalPrice = totalPrice,
+                TotalBonusPoints = totalbonusPoints
+            };
         }
 
         class StrategyContext
@@ -68,9 +78,14 @@ namespace Rental.Services
                         new SpecializedPricingStrategy());
             }
 
-            public decimal ApplyStrategy(IPricingStrategy strategy)
+            public decimal ApplyPriceStrategy(IPricingStrategy strategy)
             {
                 return strategy.CalculatePrice(_equipment, _days);
+            }
+
+            public int ApplyBonusPointsStrategy(IPricingStrategy strategy)
+            {
+                return strategy.CalculateBonusPoints();
             }
 
             public IPricingStrategy GetStrategy(EquipmentType equipmentType)
@@ -91,9 +106,12 @@ namespace Rental.Services
         public interface IPricingStrategy
         {
             decimal CalculatePrice(Equipment equipment, int days);
+            int CalculateBonusPoints();
         }
         public class HeavyPricingStrategy : IPricingStrategy
         {
+            public int CalculateBonusPoints() => 2;
+
 
             public decimal CalculatePrice(Equipment equipment, int days)
             {
@@ -103,6 +121,7 @@ namespace Rental.Services
 
         public class RegularPricingStrategy : IPricingStrategy
         {
+            public int CalculateBonusPoints() => 1;
 
             public decimal CalculatePrice(Equipment equipment, int days)
             {
@@ -126,6 +145,7 @@ namespace Rental.Services
 
         public class SpecializedPricingStrategy : IPricingStrategy
         {
+            public int CalculateBonusPoints() => 1;
 
             public decimal CalculatePrice(Equipment equipment, int days)
             {

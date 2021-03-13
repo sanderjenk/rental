@@ -10,5 +10,6 @@ namespace Rental.Models
         public EquipmentDto Equipment { get; set; }
         public int Days { get; set; }
         public decimal Price { get; set; }
+        public int BonusPoints { get; set; }
     }
 }
