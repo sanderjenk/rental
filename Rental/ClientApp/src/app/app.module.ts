@@ -13,11 +13,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EquipmentListComponent
+    EquipmentListComponent,
+    ShoppingCartComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
