@@ -7,16 +7,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { EquipmentCardComponent } from './equipment-card/equipment-card.component';
 import { MatCardModule } from '@angular/material/card';
 import { EquipmentListComponent } from './equipment-list/equipment-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EquipmentCardComponent,
     EquipmentListComponent
   ],
   imports: [
@@ -29,6 +29,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatButtonModule,
     MatCardModule,
     MatGridListModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
