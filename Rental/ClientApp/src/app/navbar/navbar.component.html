@@ -3,7 +3,7 @@
     <a mat-button [routerLink]="'/equipments'">Equipment</a>
     <a mat-button [routerLink]="'/invoices'">Invoices</a>
     <span class="example-spacer"></span>
-    <button mat-icon-button routerLink="../cart" class="example-icon" aria-label="Example icon-button with share icon">
+    <button mat-icon-button matBadgeColor="accent" [matBadge]="cartCount" routerLink="../cart" class="example-icon" aria-label="Example icon-button with share icon">
         <mat-icon>shopping_cart</mat-icon>
     </button>
 </mat-toolbar>
