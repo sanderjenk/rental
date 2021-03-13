@@ -11,4 +11,7 @@ export class EquipmentService {
   public getEquipments() {
     return this.http.get("https://localhost:44373/api/equipments");
   }
+  public getEquipment(id) {
+    return this.http.get(`https://localhost:44373/api/equipments${id}`);
+  }
 }
