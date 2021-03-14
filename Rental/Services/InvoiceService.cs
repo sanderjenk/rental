@@ -1,11 +1,11 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Rental.Entities;
-using Rental.Enums;
 using Rental.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Rental.Enums;
 
 namespace Rental.Services
 {
@@ -46,9 +46,9 @@ namespace Rental.Services
                     Price = price,
                     BonusPoints = bonusPoints,
                 };
-            });
+            }).ToList();
 
-            var totalbonusPoints = items.Sum(x => x.BonusPoints);
+            var totalBonusPoints = items.Sum(x => x.BonusPoints);
 
             var totalPrice = items.Sum(x => x.Price);
 
@@ -56,10 +56,9 @@ namespace Rental.Services
             {
                 InvoiceLines = items,
                 TotalPrice = totalPrice,
-                TotalBonusPoints = totalbonusPoints
+                TotalBonusPoints = totalBonusPoints
             };
         }
-
         public class StrategyContext
         {
             private readonly int _days;
@@ -96,17 +95,13 @@ namespace Rental.Services
 
             public IPricingStrategy GetStrategy(EquipmentType equipmentType)
             {
-                switch (equipmentType)
+                return equipmentType switch
                 {
-                    case EquipmentType.Heavy:
-                        return _strategyContext[nameof(HeavyPricingStrategy)];
-                    case EquipmentType.Regular:
-                        return _strategyContext[nameof(RegularPricingStrategy)];
-                    case EquipmentType.Specialized:
-                        return _strategyContext[nameof(SpecializedPricingStrategy)];
-                    default:
-                        return _strategyContext[nameof(RegularPricingStrategy)];
-                }
+                    EquipmentType.Heavy => _strategyContext[nameof(HeavyPricingStrategy)],
+                    EquipmentType.Regular => _strategyContext[nameof(RegularPricingStrategy)],
+                    EquipmentType.Specialized => _strategyContext[nameof(SpecializedPricingStrategy)],
+                    _ => _strategyContext[nameof(RegularPricingStrategy)]
+                };
             }
         }
         public interface IPricingStrategy
@@ -133,7 +128,7 @@ namespace Rental.Services
             {
                 var price = OneTime;
                 var counter = 1;
-                for (int i = 0; i < days; i++)
+                for (var i = 0; i < days; i++)
                 {
                     if (counter <= 2)
                     {
@@ -157,7 +152,7 @@ namespace Rental.Services
             {
                 decimal price = 0;
                 var counter = 1;
-                for (int i = 0; i < days; i++)
+                for (var i = 0; i < days; i++)
                 {
                     if (counter <= 3)
                     {
