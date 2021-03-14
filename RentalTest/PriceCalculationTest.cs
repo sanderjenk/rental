@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Text;
 using Rental.Services.PricingStrategies;
 using Xunit;
-using static Rental.Services.InvoiceService;
 
 namespace RentalTest
 {
@@ -13,8 +12,7 @@ namespace RentalTest
         [Fact]
         public void ExceptionThrowingNullEquipmentTest()
         {
-            Equipment equipment = null;
-            var ex = Assert.Throws<ArgumentNullException>(() => new StrategyContext(equipment, 5));
+            var ex = Assert.Throws<ArgumentNullException>(() => new StrategyContext(null, 5));
 
             Assert.Equal("Value cannot be null. (Parameter 'equipment')", ex.Message);
         }
