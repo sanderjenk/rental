@@ -48,7 +48,7 @@ export class ShoppingCartService {
     
     equipmentsTable.unshift(["Name", "Type", "Days", "BonusPoints", "Price"])
     
-    equipmentsTable.push(["", "", "", `Total: ${data.totalBonusPoints}`, `Total: ${data.totalPrice}`])
+    equipmentsTable.push([{text:"Totals", bold: true}, "", "", {text:data.totalBonusPoints, bold: true}, {text:data.totalPrice, bold: true}])
     
     const docDefinition = {
       content: [
