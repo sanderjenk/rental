@@ -12,9 +12,11 @@ export class ShoppingCartComponent implements OnInit {
 
   dataSource = new CartDataSource(this.shoppingCartService);
 
+  shoppingCartEmpty;
   constructor(private shoppingCartService: ShoppingCartService) { }
 
   ngOnInit(): void {
+    this.shoppingCartService.cartItemsObs.subscribe(cart => this.shoppingCartEmpty = cart.length == 0);
   }
 
   discardShoppingCart() {
