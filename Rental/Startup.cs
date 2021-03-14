@@ -55,7 +55,7 @@ namespace Rental
 
             services.AddControllers().AddFluentValidation();
 
-            services.AddTransient<IValidator<IEnumerable<ShoppingCartItem>>, ShoppingCartValidator>();
+            services.AddTransient<IValidator<List<ShoppingCartItem>>, ShoppingCartValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

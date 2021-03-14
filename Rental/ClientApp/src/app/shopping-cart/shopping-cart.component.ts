@@ -12,7 +12,8 @@ export class ShoppingCartComponent implements OnInit {
 
   dataSource = new CartDataSource(this.shoppingCartService);
 
-  shoppingCartEmpty;
+  shoppingCartEmpty: boolean;
+  
   constructor(private shoppingCartService: ShoppingCartService) { }
 
   ngOnInit(): void {

@@ -31,10 +31,10 @@ export class ShoppingCartService {
   }
 
   public getInvoiceData() {
-    const test = this.cartSubject.value.map(x => {
+    const cartData = this.cartSubject.value.map(x => {
       return { equipmentId: x.equipment.id, days: x.days }
     })
-    return this.http.post(`${environment.apiUrl}invoices`, test);
+    return this.http.post(`${environment.apiUrl}invoices`, cartData);
   }
 
   public generatePdf() {

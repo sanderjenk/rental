@@ -7,7 +7,7 @@ using Rental.Models;
 
 namespace Rental.Validators
 {
-    public class ShoppingCartValidator: AbstractValidator<IEnumerable<ShoppingCartItem>>
+    public class ShoppingCartValidator: AbstractValidator<List<ShoppingCartItem>>
     {
         public ShoppingCartValidator()
         {
