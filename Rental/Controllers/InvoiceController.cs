@@ -23,7 +23,7 @@ namespace Rental.Controllers
         [HttpPost]
         public IActionResult GetCalculatedInvoice(List<ShoppingCartItem> shoppingCartItems)
         {
-            var shoppingCart = _invoiceService.GetCalculatedShoppingCart(shoppingCartItems);
+            var shoppingCart = _invoiceService.GetCalculatedInvoice(shoppingCartItems);
             return Ok(shoppingCart);
         }
     }

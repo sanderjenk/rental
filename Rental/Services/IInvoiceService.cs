@@ -5,6 +5,6 @@ namespace Rental.Services
 {
     public interface IInvoiceService
     {
-        CalculatedInvoice GetCalculatedShoppingCart(List<ShoppingCartItem> shoppingCartItems);
+        CalculatedInvoice GetCalculatedInvoice(List<ShoppingCartItem> shoppingCartItems);
     }
 }
