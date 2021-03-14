@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Rental.Services.PricingStrategies;
 using Xunit;
 using static Rental.Services.InvoiceService;
 

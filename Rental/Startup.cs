@@ -11,8 +11,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using Rental.Models;
 using Rental.Services;
+using Rental.Validators;
 
 namespace Rental
 {
@@ -49,7 +53,9 @@ namespace Rental
 
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation();
+
+            services.AddTransient<IValidator<IEnumerable<ShoppingCartItem>>, ShoppingCartValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
