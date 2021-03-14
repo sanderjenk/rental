@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CartItem } from './cart-item';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { environment } from 'src/environments/environment';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Injectable({
@@ -33,7 +34,7 @@ export class ShoppingCartService {
     const test = this.cartSubject.value.map(x => {
       return { equipmentId: x.equipment.id, days: x.days }
     })
-    return this.http.post("https://localhost:44373/api/invoices", test);
+    return this.http.post(`${environment.apiUrl}invoices`, test);
   }
 
   public generatePdf() {
