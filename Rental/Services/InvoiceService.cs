@@ -60,7 +60,7 @@ namespace Rental.Services
             };
         }
 
-        class StrategyContext
+        public class StrategyContext
         {
             int _days;
             Equipment _equipment;
@@ -69,7 +69,13 @@ namespace Rental.Services
             public StrategyContext(Equipment equipment, int days)
             {
                 _days = days;
-                _equipment = equipment;
+
+                if (days < 1)
+                {
+                    throw new ArgumentException($"{nameof(days)} has to be greater than 0");
+                }
+
+                _equipment = equipment ?? throw new ArgumentNullException(nameof(equipment));
                 strategyContext.Add(nameof(HeavyPricingStrategy),
                         new HeavyPricingStrategy());
                 strategyContext.Add(nameof(RegularPricingStrategy),
