@@ -11,12 +11,12 @@ namespace Rental.Services
 {
     public class InvoiceService : IInvoiceService
     {
-        const decimal ONE_TIME = 100;
-        const decimal PREMIUM = 60;
-        const decimal REGULAR = 40;
+        private const decimal OneTime = 100;
+        private const decimal Premium = 60;
+        private const decimal Regular = 40;
 
-        IRentingRepository _rentingRepository;
-        IMapper _mapper;
+        private readonly IRentingRepository _rentingRepository;
+        private readonly IMapper _mapper;
         public InvoiceService(IRentingRepository rentingRepository, IMapper mapper)
         {
             _rentingRepository = rentingRepository;
@@ -62,9 +62,9 @@ namespace Rental.Services
 
         public class StrategyContext
         {
-            int _days;
-            Equipment _equipment;
-            Dictionary<string, IPricingStrategy> strategyContext
+            private readonly int _days;
+            private readonly Equipment _equipment;
+            private readonly Dictionary<string, IPricingStrategy> _strategyContext
                 = new Dictionary<string, IPricingStrategy>();
             public StrategyContext(Equipment equipment, int days)
             {
@@ -76,11 +76,11 @@ namespace Rental.Services
                 }
 
                 _equipment = equipment ?? throw new ArgumentNullException(nameof(equipment));
-                strategyContext.Add(nameof(HeavyPricingStrategy),
+                _strategyContext.Add(nameof(HeavyPricingStrategy),
                         new HeavyPricingStrategy());
-                strategyContext.Add(nameof(RegularPricingStrategy),
+                _strategyContext.Add(nameof(RegularPricingStrategy),
                         new RegularPricingStrategy());
-                strategyContext.Add(nameof(SpecializedPricingStrategy),
+                _strategyContext.Add(nameof(SpecializedPricingStrategy),
                         new SpecializedPricingStrategy());
             }
 
@@ -99,13 +99,13 @@ namespace Rental.Services
                 switch (equipmentType)
                 {
                     case EquipmentType.Heavy:
-                        return strategyContext[nameof(HeavyPricingStrategy)];
+                        return _strategyContext[nameof(HeavyPricingStrategy)];
                     case EquipmentType.Regular:
-                        return strategyContext[nameof(RegularPricingStrategy)];
+                        return _strategyContext[nameof(RegularPricingStrategy)];
                     case EquipmentType.Specialized:
-                        return strategyContext[nameof(SpecializedPricingStrategy)];
+                        return _strategyContext[nameof(SpecializedPricingStrategy)];
                     default:
-                        return strategyContext[nameof(RegularPricingStrategy)];
+                        return _strategyContext[nameof(RegularPricingStrategy)];
                 }
             }
         }
@@ -121,7 +121,7 @@ namespace Rental.Services
 
             public decimal CalculatePrice(Equipment equipment, int days)
             {
-                return ONE_TIME + days * PREMIUM;
+                return OneTime + days * Premium;
             }
         }
 
@@ -131,17 +131,17 @@ namespace Rental.Services
 
             public decimal CalculatePrice(Equipment equipment, int days)
             {
-                var price = ONE_TIME;
+                var price = OneTime;
                 var counter = 1;
                 for (int i = 0; i < days; i++)
                 {
                     if (counter <= 2)
                     {
-                        price += PREMIUM;
+                        price += Premium;
                     }
                     else
                     {
-                        price += REGULAR;
+                        price += Regular;
                     }
                     counter++;
                 }
@@ -161,11 +161,11 @@ namespace Rental.Services
                 {
                     if (counter <= 3)
                     {
-                        price += PREMIUM;
+                        price += Premium;
                     }
                     else
                     {
-                        price += REGULAR;
+                        price += Regular;
                     }
                     counter++;
                 }
