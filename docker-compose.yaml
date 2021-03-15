@@ -1,0 +1,11 @@
+version: '3'
+services:
+  api:
+    build: .
+    ports:
+      - "5000:80"
+    
+  client:
+    build: ./Rental/ClientApp
+    ports: 
+      - "4200:80"
