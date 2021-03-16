@@ -37,9 +37,7 @@ export class EquipmentListComponent implements OnInit {
     }
     this.equipmentService.getEquipments(parameters)
     .subscribe((resp: any) => {
-      console.log(resp.body)
       const paginationHeader = JSON.parse(resp.headers.get("X-Pagination"));
-      console.log(paginationHeader)
       this.length = paginationHeader.totalCount;
       this.equipments = resp.body; 
     });
