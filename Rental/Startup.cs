@@ -40,7 +40,8 @@ namespace Rental
                         builder
                         .AllowAnyOrigin()
                         .AllowAnyHeader()
-                        .AllowAnyMethod();
+                        .AllowAnyMethod()
+                        .WithExposedHeaders("X-Pagination");
                     });
             });
 
@@ -79,11 +80,10 @@ namespace Rental
                 endpoints.MapControllers();
             });
 
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetRequiredService<RentingContext>();
-                context.Database.EnsureCreated();
-            }
+            using var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope();
+            if (serviceScope == null) return;
+            var context = serviceScope.ServiceProvider.GetRequiredService<RentingContext>();
+            context.Database.EnsureCreated();
         }
     }
 }

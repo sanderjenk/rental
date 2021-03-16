@@ -6,7 +6,9 @@ using Rental.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
+using Rental.ResourceParameters;
 
 namespace Rental.Controllers
 {
@@ -23,11 +25,24 @@ namespace Rental.Controllers
         }
         
         [HttpGet]
-        public IActionResult GetEquipments()
+        public IActionResult GetEquipments([FromQuery]EquipmentsResourceParameters parameters)
         {
-            var equipments = _rentingRepository.GetEquipments();
-            var dtos = _mapper.Map<IEnumerable<EquipmentDto>>(equipments);
-            return Ok(dtos);
+            var equipmentsFromRepo = _rentingRepository.GetEquipments(parameters);
+
+            var paginationMetadata = new
+            {
+                totalCount = equipmentsFromRepo.TotalCount,
+                pageSize = equipmentsFromRepo.PageSize,
+                currentPage = equipmentsFromRepo.CurrentPage,
+                totalPages = equipmentsFromRepo.TotalPages
+            };
+
+            Response.Headers.Add("X-Pagination",
+                JsonSerializer.Serialize(paginationMetadata));
+
+            var equipmentsToReturn = _mapper.Map<IEnumerable<EquipmentDto>>(equipmentsFromRepo);
+
+            return Ok(equipmentsToReturn);
         }
     }
 }

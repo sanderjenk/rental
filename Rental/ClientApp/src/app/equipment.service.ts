@@ -9,7 +9,7 @@ export class EquipmentService {
 
   constructor(private http: HttpClient) { }
 
-  public getEquipments() {
-    return this.http.get(`${environment.apiUrl}equipments`);
+  public getEquipments(parameters) {
+    return this.http.get(`${environment.apiUrl}equipments`, {params: parameters, observe: "response"});
   }
 }

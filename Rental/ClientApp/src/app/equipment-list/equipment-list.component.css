@@ -12,3 +12,11 @@ mat-card > img {
     grid-gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(300px, 0.8fr));
   }
+
+  mat-paginator {
+    margin-top: 1em;
+  }
+
+  mat-toolbar {
+    margin-bottom: 1em;
+  }

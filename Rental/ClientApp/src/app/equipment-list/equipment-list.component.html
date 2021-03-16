@@ -17,3 +17,11 @@
         </mat-card-actions>
     </mat-card>
 </div>
+<mat-paginator 
+
+    *ngIf="equipments"
+    [length]="length"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="pageChanged($event)">
+</mat-paginator>

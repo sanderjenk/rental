@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EquipmentService } from '../equipment.service';
 import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
@@ -11,7 +12,14 @@ import { Equipment } from './equipment';
   providers: [EquipmentService]
 })
 export class EquipmentListComponent implements OnInit {
-  equipments: any;
+  length = 100;
+  pageSize = 3;
+  pageNumber =1;
+  pageSizeOptions: number[] = [3, 6, 9];
+
+  pageEvent: PageEvent;
+
+  equipments: any[];
   constructor(
     private equipmentService: EquipmentService,
     private shoppingCartService: ShoppingCartService,
@@ -23,8 +31,18 @@ export class EquipmentListComponent implements OnInit {
   }
 
   getEquipments() {
-    this.equipmentService.getEquipments()
-    .subscribe(items => this.equipments = items, error => console.log(error));
+    const parameters = {
+      pageNumber: this.pageNumber, 
+      pageSize: this.pageSize
+    }
+    this.equipmentService.getEquipments(parameters)
+    .subscribe((resp: any) => {
+      console.log(resp.body)
+      const paginationHeader = JSON.parse(resp.headers.get("X-Pagination"));
+      console.log(paginationHeader)
+      this.length = paginationHeader.totalCount;
+      this.equipments = resp.body; 
+    });
   }
 
   addToCart(equipment: Equipment, days: string) {
@@ -48,7 +66,14 @@ export class EquipmentListComponent implements OnInit {
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 2000,
+      duration: 1000,
     });
+  }
+
+  pageChanged($event) {
+    console.debug($event)
+    this.pageSize = $event.pageSize;
+    this.pageNumber = $event.pageIndex + 1;
+    this.getEquipments();
   }
 }
